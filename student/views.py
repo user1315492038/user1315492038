@@ -52,7 +52,7 @@ def register(request:HttpRequest):
                 new_user.name = username
                 new_user.password = password1
                 new_user.save()
-                return redirect('login/') 
+                return redirect('/login/')
     register_form = RegisterForm()
     return render(request, 'register.html', locals())
 
