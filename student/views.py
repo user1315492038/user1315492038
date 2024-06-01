@@ -1,12 +1,12 @@
 from django.shortcuts import render,redirect
-from django.http import HttpRequest
+from django.http import HttpRequest,HttpResponse
 
 from . import models
 from .forms import UserForm,RegisterForm
 
 # Create your views here.
 def index(request:HttpRequest):
-    return render(request,'student/index.html')
+    return render("welcome!")
 
 def login(request:HttpRequest):
     if request.session.get('is_login', None):  
