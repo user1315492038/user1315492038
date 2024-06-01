@@ -6,7 +6,7 @@ from .forms import UserForm,RegisterForm
 
 # Create your views here.
 def index(request:HttpRequest):
-    return HttpResponse(r"welcome!")
+    return render(request,'index.html')
 
 def login(request:HttpRequest):
     if request.session.get('is_login', None):  
