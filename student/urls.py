@@ -1,5 +1,6 @@
 from django.urls import path
-from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from student import views
 
 urlpatterns = [
@@ -8,3 +9,6 @@ urlpatterns = [
     path('register/',views.register),
     path('logout/',views.logout)
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpRequest,HttpResponse
+from django.http import HttpRequest
 
 from . import models
 from .forms import UserForm,RegisterForm
@@ -43,7 +43,7 @@ def register(request:HttpRequest):
                 message = "Different input!"
                 return render(request, 'register.html', locals())
             else:
-                same_name_user = models.student_info.objects.filter(username=username)
+                same_name_user = models.student_info.objects.filter(name=username)
                 if same_name_user:
                     message = 'User name already exists'
                     return render(request, 'register.html', locals())

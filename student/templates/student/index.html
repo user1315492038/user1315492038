@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>index</title>
-    </head>
-    <body>
-        <p><strong>Welcome!</strong></p>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{# student/templates/student/index.html#}
+ 
+    {% extends 'base.html' %}
+    {% block title %}homepage{% endblock %}
+    {% block content %}
+        {% if request.session.is_login %}
+        <h1>hello，{{ request.session.user_name }}</h1>
+        {% else %}
+        <h1>404 not found</h1>
+        {% endif %}
+    {% endblock %}
+</body>
 </html>
