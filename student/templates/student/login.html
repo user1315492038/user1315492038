@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+{% extends 'login/base.html' %}
+{% load staticfiles %}
+{% block title %}login{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
 <div class="col-md-4 col-sm-6 border p-0 offset-md-4 offset-sm-6 my-5">
     <h3 class="text-center bg-info p-2 text-white mb-0">login</h3>
     <form class='p-5 bg-white' action="/login/" method="post">
