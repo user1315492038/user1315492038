@@ -8,6 +8,9 @@ from .forms import UserForm,RegisterForm
 def index(request:HttpRequest):
     return render(request,'index.html')
 
+def details(request:HttpRequest):
+    return render(request,'details.html')
+
 def login(request:HttpRequest):
     if request.session.get('is_login', None):  
         return redirect('/index')
