@@ -9,6 +9,8 @@ def index(request:HttpRequest):
     return render(request,'index.html')
 
 def details(request:HttpRequest):
+    if not request.session.get('is_login', None):
+        return render(request,'index.html')
     return render(request,'details.html')
 
 def login(request:HttpRequest):
