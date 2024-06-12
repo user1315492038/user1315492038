@@ -9,7 +9,7 @@ class student_info(models.Model):
     student_id = models.CharField(max_length=19,unique=True)#学籍号
     school = models.CharField(max_length=20,default="")#学校
     in_class = models.CharField(max_length=10,default="")#规避关键字class,班级
-    status = models.CharField(max_length=10)#状态
+    status = models.CharField(max_length=10)#状态,1为在校
 
     password = models.CharField(max_length=18,default="123456")#用于登录的密码
 
