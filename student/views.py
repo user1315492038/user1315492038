@@ -11,7 +11,8 @@ def index(request:HttpRequest):
 def details(request:HttpRequest):
     if not request.session.get('is_login', None):
         return render(request,'index.html')
-    return render(request,'details.html')
+    else:
+        return render(request,'details.html')
 
 def login(request:HttpRequest):
     if request.session.get('is_login', None):  
@@ -35,6 +36,13 @@ def login(request:HttpRequest):
     login_form = UserForm()
     return render(request, 'login.html', locals())
 
+def logout(request:HttpRequest):
+    if not request.session.get('is_login', None):  
+        return redirect("/index/")
+    request.session.flush()  
+    return redirect('/index/')
+
+"""
 def register(request:HttpRequest):
     if request.session.get('is_login', None):
         return redirect("/index/")
@@ -60,10 +68,4 @@ def register(request:HttpRequest):
                 return redirect('/login/')
     register_form = RegisterForm()
     return render(request, 'register.html', locals())
-
-
-def logout(request:HttpRequest):
-    if not request.session.get('is_login', None):  
-        return redirect("/index/")
-    request.session.flush()  
-    return redirect('/index/')
+"""
