@@ -7,8 +7,8 @@ urlpatterns = [
     path('index/',views.index),
     path('details/',views.details),
     path('login/',views.login),
-    path('register/',views.register),
     path('logout/',views.logout)
+    #path('register/',views.register),
 ]
 
 if settings.DEBUG:

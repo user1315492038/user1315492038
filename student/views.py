@@ -27,8 +27,14 @@ def login(request:HttpRequest):
                 user = models.student_info.objects.get(name=username)
                 if user.password == password:  
                     request.session['is_login'] = True  
-                    request.session['user_id'] = user.student_id
                     request.session['user_name'] = user.name
+                    request.session['sex'] = user.sex
+                    request.session['citizen_id'] = user.citizen_id
+                    request.session['student_id'] = user.student_id
+                    request.session['school'] = user.school
+                    request.session['class'] = user.in_class
+                    request.session['status'] = user.status
+                    request.session['password'] = user.password
                     return redirect('/index/')
             except:
                 message = "User not exists"

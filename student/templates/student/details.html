@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}login{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-4 col-md-offset-4">
+        <form class='form-login' action="/index/" method="post">
+            {% csrf_token %}
+            <h1>Hello，{{ request.session.user_name }}</h1>
+            <h4>Here's your personal information</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td>{{ request.session.user_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Sex</td>
+                        <td>{{ request.session.sex }}</td>
+                    </tr>
+                    <tr>
+                        <td>Citizen ID</td>
+                        <td>{{ request.session.citizen_id }}</td>
+                    </tr>
+                    <tr>
+                        <td>Student ID</td>
+                        <td>{{ request.session.student_id }}</td>
+                    </tr>
+                    <tr>
+                        <td>School</td>
+                        <td>{{ request.session.school }}</td>
+                    </tr>
+                    <tr>
+                        <td>Class</td>
+                        <td>{{ request.session.class }}</td>
+                    </tr>
+                    <tr>
+                        <td>status</td>
+                        <td>{{ request.session.status }}</td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>{{ request.session.password }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+{% endblock %}
