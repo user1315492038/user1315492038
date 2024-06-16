@@ -11,7 +11,7 @@ class student_info(models.Model):
     in_class = models.CharField(max_length=10,default="")#规避关键字class,班级
     status = models.CharField(max_length=10)#状态,1为在校
 
-    password = models.CharField(max_length=18,default="123456")#用于登录的密码
+    password = models.CharField(max_length=18,default="")#用于登录的密码
 
     @admin.display(
         boolean=True,
