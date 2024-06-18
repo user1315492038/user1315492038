@@ -45,12 +45,14 @@ def login(request:HttpRequest):
 def logout(request:HttpRequest):
     if not request.session.get('is_login', None):  
         return redirect("/index/")
+    
     request.session.flush()  
     return redirect('/index/')
 
 def register(request:HttpRequest):
     if request.session.get('is_login', None):
         return redirect("/index/")
+    
     if request.method == "POST":
         register_form = RegisterForm(request.POST)
         if register_form.is_valid(): 
@@ -71,7 +73,7 @@ def register(request:HttpRequest):
                 return render(request, 'register.html', locals())
             else:
                 same_name_user = models.student_info.objects.filter(name=studentname)
-                if same_name_user:
+                if same_name_user.exists():
                     message = 'User name already exists'
                     return render(request, 'register.html', locals())
             if message != "unused":

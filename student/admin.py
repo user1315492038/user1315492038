@@ -9,4 +9,6 @@ class student_infoAdmin(admin.ModelAdmin):
     ordering = ["student_id"]
     list_per_page = 20
 
+    search_fields=["name","citizen_id","student_id"]
+
     admin.site.site_header = "student_info management"#修改管理员界面header
