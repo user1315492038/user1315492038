@@ -49,6 +49,49 @@ def logout(request:HttpRequest):
     request.session.flush()  
     return redirect('/index/')
 
+def register(request: HttpRequest):
+    if request.session.get('is_login', None):
+        return redirect("/index/")
+    
+    if request.method == "POST":
+        register_form = RegisterForm(request.POST)
+        if register_form.is_valid(): 
+            studentname = register_form.cleaned_data['name']
+            password1 = register_form.cleaned_data['password1']
+            password2 = register_form.cleaned_data['password2']
+            sex = register_form.cleaned_data['sex']
+            citizen_id = register_form.cleaned_data['citizen_id']
+            student_id = register_form.cleaned_data['student_id']
+            school = register_form.cleaned_data['school']
+            in_class = register_form.cleaned_data['in_class']
+            status = register_form.cleaned_data['status']
+
+            if password1 != password2: 
+                message = "Different input!"
+                return render(request, 'register.html', locals())
+            
+            same_name_user = models.student_info.objects.filter(name=studentname)
+            if same_name_user:
+                message = 'User name already exists'
+                return render(request, 'register.html', locals())
+            
+            # If all checks pass, create the new user
+            new_user = models.student_info(
+                name=studentname,
+                password=password1,
+                sex=sex,
+                citizen_id=citizen_id,
+                student_id=student_id,
+                school=school,
+                in_class=in_class,
+                status=status
+            )
+            new_user.save()
+            return redirect('/login/')
+    
+    register_form = RegisterForm()
+    return render(request, 'register.html', locals())
+
 """
 def register(request:HttpRequest):
     if request.session.get('is_login', None):
@@ -94,45 +137,3 @@ def register(request:HttpRequest):
     register_form = RegisterForm()
     return render(request, 'register.html', locals())
 """
-def register(request: HttpRequest):
-    if request.session.get('is_login', None):
-        return redirect("/index/")
-    
-    if request.method == "POST":
-        register_form = RegisterForm(request.POST)
-        if register_form.is_valid(): 
-            studentname = register_form.cleaned_data['name']
-            password1 = register_form.cleaned_data['password1']
-            password2 = register_form.cleaned_data['password2']
-            sex = register_form.cleaned_data['sex']
-            citizen_id = register_form.cleaned_data['citizen_id']
-            student_id = register_form.cleaned_data['student_id']
-            school = register_form.cleaned_data['school']
-            in_class = register_form.cleaned_data['in_class']
-            status = register_form.cleaned_data['status']
-
-            if password1 != password2: 
-                message = "Different input!"
-                return render(request, 'register.html', locals())
-            
-            same_name_user = models.student_info.objects.filter(name=studentname)
-            if same_name_user:
-                message = 'User name already exists'
-                return render(request, 'register.html', locals())
-            
-            # If all checks pass, create the new user
-            new_user = models.student_info(
-                name=studentname,
-                password=password1,
-                sex=sex,
-                citizen_id=citizen_id,
-                student_id=student_id,
-                school=school,
-                in_class=in_class,
-                status=status
-            )
-            new_user.save()
-            return redirect('/login/')
-    
-    register_form = RegisterForm()
-    return render(request, 'register.html', locals())
