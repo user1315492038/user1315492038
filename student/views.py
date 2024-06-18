@@ -73,7 +73,7 @@ def register(request:HttpRequest):
                 return render(request, 'register.html', locals())
             else:
                 same_name_user = models.student_info.objects.filter(name=studentname)
-                if same_name_user.exists():
+                if same_name_user:
                     message = 'User name already exists'
                     return render(request, 'register.html', locals())
             if message != "unused":
